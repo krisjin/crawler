@@ -11,10 +11,6 @@ import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
-/**
- * @author Siva
- * 
- */
 public class MyBatisUtil {
 	private static SqlSessionFactory sqlSessionFactory;
 
@@ -22,7 +18,8 @@ public class MyBatisUtil {
 
 	static {
 		try {
-			InputStream is = DataSourceFactory.class.getResourceAsStream("/application.properties");
+			InputStream is = DataSourceFactory.class
+					.getResourceAsStream("/application.properties");
 			PROPERTIES.load(is);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -48,8 +45,10 @@ public class MyBatisUtil {
 		if (sqlSessionFactory == null) {
 			InputStream inputStream;
 			try {
-				inputStream = Resources.getResourceAsStream("mybatis-config.xml");
-				sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+				inputStream = Resources
+						.getResourceAsStream("mybatis-config.xml");
+				sqlSessionFactory = new SqlSessionFactoryBuilder()
+						.build(inputStream);
 			} catch (IOException e) {
 				throw new RuntimeException(e.getCause());
 			}

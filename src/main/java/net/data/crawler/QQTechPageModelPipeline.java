@@ -30,8 +30,15 @@ public class QQTechPageModelPipeline implements PageModelPipeline {
 			
 			
 			News news =new News();
-			news.setFolderId(1L);
+			news.setFolderId(2L);
 			news.setStatus(1);
+			news.setMedia("腾讯科技");
+			news.setMediaUrl(qqt.getUrl());
+			if(StringUtils.isNullOrEmpty(qqt.getImgUrl())){
+				news.setThumbnailsUrl("");
+			}else{
+				news.setThumbnailsUrl(qqt.getImgUrl());
+			}
 			if(StringUtils.isNullOrEmpty(qqt.getAuthor())){
 				news.setAuthor("");
 			}else{
@@ -40,7 +47,11 @@ public class QQTechPageModelPipeline implements PageModelPipeline {
 			
 			news.setTitle(title);
 			news.setContent(content);
-			news.setPostDate(d);
+			if(d==null){
+				news.setPostDate(new Date());
+			}else{
+				news.setPostDate(d);
+			}
 			newsService.addNews(news);
 		
 		}

@@ -8,9 +8,7 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
-/**
- * 日期工具类
- * 
+/**日期工具类
  * @author krisjin
  */
 public class DateUtil {
@@ -99,7 +97,6 @@ public class DateUtil {
 
 	/**
 	 * 获得日期格式：{2014年06月}
-	 * 
 	 * @param timeMills
 	 * @return
 	 */
@@ -118,7 +115,7 @@ public class DateUtil {
 	public static String format4(String dateTime) throws ParseException {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy年MM月");
-
+		
 		Date df = sdf.parse(dateTime);
 		return sdf2.format(df);
 
@@ -126,7 +123,6 @@ public class DateUtil {
 
 	/**
 	 * 获得当前时间的月份：{6月}
-	 * 
 	 * @return
 	 */
 	public static String currentMonth() {
@@ -199,5 +195,6 @@ public class DateUtil {
 		java.text.SimpleDateFormat formatter = new java.text.SimpleDateFormat(newFormat);
 		return formatter.format(date);
 	}
+
 
 }

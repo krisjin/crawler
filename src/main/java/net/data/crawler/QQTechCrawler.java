@@ -3,6 +3,7 @@ package net.data.crawler;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.model.OOSpider;
 import us.codecraft.webmagic.model.annotation.ExtractBy;
+import us.codecraft.webmagic.model.annotation.ExtractByUrl;
 import us.codecraft.webmagic.model.annotation.TargetUrl;
 
 /**
@@ -21,11 +22,18 @@ public class QQTechCrawler {
 
 	@ExtractBy(value = "//span[@class='pubTime']/text()")
 	private String date;
-	
-	@ExtractBy(value="//span[@class='auth']/text()")
+
+	@ExtractBy(value = "//span[@class='auth']/text()")
 	private String author;
+
+	@ExtractByUrl
+	private String url;
+	
+	@ExtractBy(value="//p[@align='center']/img/@src")
+	private String imgUrl;
+
 	public static void main(String[] args) {
-		OOSpider.create(Site.me(), new QQTechPageModelPipeline(), QQTechCrawler.class).thread(5).addUrl("http://tech.qq.com").run();
+		OOSpider.create(Site.me(), new QQTechPageModelPipeline(),QQTechCrawler.class).thread(5).addUrl("http://tech.qq.com").run();
 	}
 
 	public String getTitle() {
@@ -46,6 +54,14 @@ public class QQTechCrawler {
 
 	public void setAuthor(String author) {
 		this.author = author;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public String getImgUrl() {
+		return imgUrl;
 	}
 
 	

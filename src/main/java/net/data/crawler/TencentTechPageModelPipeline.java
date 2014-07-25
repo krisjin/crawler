@@ -15,45 +15,45 @@ import us.codecraft.webmagic.pipeline.PageModelPipeline;
  * @date 2014-7-9上午11:31:23
  */
 
-public class QQTechPageModelPipeline implements PageModelPipeline {
+public class TencentTechPageModelPipeline implements PageModelPipeline {
 
-	private NewsService newsService= new NewsService();
+	private NewsService newsService = new NewsService();
 
 	public void process(Object obj, Task task) {
-		
-		if(obj instanceof QQTechCrawler){
-			QQTechCrawler qqt= (QQTechCrawler)obj;
-			String title=qqt.getTitle();
-			String date =qqt.getDate();
-			String content=qqt.getContent();
-			Date d=DateUtil.convertStringDateTimeToDate(date, "yyyy年MM月dd日HH:mm");
-			
-			
-			News news =new News();
+
+		if (obj instanceof TencentTechCrawler) {
+			TencentTechCrawler qqt = (TencentTechCrawler) obj;
+			String title = qqt.getTitle();
+			String date = qqt.getDate();
+			String content = qqt.getContent();
+
+			News news = new News();
 			news.setFolderId(2L);
 			news.setStatus(1);
 			news.setMedia("腾讯科技");
 			news.setMediaUrl(qqt.getUrl());
-			if(StringUtils.isNullOrEmpty(qqt.getImgUrl())){
+
+			if (StringUtils.isNullOrEmpty(qqt.getImgUrl())) {
 				news.setThumbnailsUrl("");
-			}else{
+			} else {
 				news.setThumbnailsUrl(qqt.getImgUrl());
 			}
-			if(StringUtils.isNullOrEmpty(qqt.getAuthor())){
+			if (StringUtils.isNullOrEmpty(qqt.getAuthor())) {
 				news.setAuthor("");
-			}else{
+			} else {
 				news.setAuthor(qqt.getAuthor());
 			}
-			
-			news.setTitle(title);
-			news.setContent(content);
-			if(d==null){
+
+			if (date == null) {
 				news.setPostDate(new Date());
-			}else{
+			} else {
+				Date d = DateUtil.convertStringDateTimeToDate(date, "yyyy年MM月dd日HH:mm");
 				news.setPostDate(d);
 			}
+			news.setTitle(title);
+			news.setContent(content);
 			newsService.addNews(news);
-		
+
 		}
 	}
 }

@@ -11,8 +11,8 @@ import us.codecraft.webmagic.model.annotation.TargetUrl;
  * @date 2014-7-9下午2:28:54
  */
 
-@TargetUrl("http://tech.qq.com/a/\\d+/\\d+.htm")
-public class QQTechCrawler {
+@TargetUrl("http://tech.qq.com/a/20140725/\\d+.htm")
+public class TencentTechCrawler {
 
 	@ExtractBy(value = "//div[@class='hd']/h1/text()")
 	private String title;
@@ -33,7 +33,7 @@ public class QQTechCrawler {
 	private String imgUrl;
 
 	public static void main(String[] args) {
-		OOSpider.create(Site.me(), new QQTechPageModelPipeline(),QQTechCrawler.class).thread(5).addUrl("http://tech.qq.com").run();
+		OOSpider.create(Site.me(), new TencentTechPageModelPipeline(),TencentTechCrawler.class).thread(5).addUrl("http://tech.qq.com").run();
 	}
 
 	public String getTitle() {

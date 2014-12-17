@@ -4,8 +4,8 @@
 <mapper namespace="net.data.mappers.NewsMapper">
 
 	<insert id="addNews" parameterType="News" useGeneratedKeys="true" keyProperty="id">
-		INSERT INTO NEWS(title,content,post_date,author,status,folder_id,media_url,media,thumbnails_url)
-		VALUES(#{title},#{content},#{postDate},#{author},#{status},#{folderId},#{mediaUrl},#{media},#{thumbnailsUrl})
+		INSERT INTO tech_news(title,content,post_date,author,media_url,media,thumbnails_url)
+		VALUES(#{title},#{content},#{postDate},#{author},#{mediaUrl},#{media},#{thumbnailsUrl})
 	</insert>
 
 </mapper>

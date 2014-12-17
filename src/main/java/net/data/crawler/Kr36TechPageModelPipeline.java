@@ -18,7 +18,7 @@ import com.mysql.jdbc.StringUtils;
  * @date 2014-7-9上午11:31:23
  */
 
-public class TencentTechPageModelPipeline implements PageModelPipeline {
+public class Kr36TechPageModelPipeline implements PageModelPipeline {
 	int capicity = 1000000;
 	int initDataSize = 800000;
 	private BloomFilter bloomfilter = new BloomFilter(capicity, initDataSize, 8);
@@ -37,7 +37,7 @@ public class TencentTechPageModelPipeline implements PageModelPipeline {
 			News news = new News();
 			news.setFolderId(2L);
 			news.setStatus(1);
-			news.setMedia("腾讯科技");
+			news.setMedia("36氪");
 			news.setMediaUrl(qqt.getUrl());
 			if (StringUtils.isNullOrEmpty(title)) {
 				return;

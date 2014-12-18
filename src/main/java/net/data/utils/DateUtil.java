@@ -196,5 +196,24 @@ public class DateUtil {
 		return formatter.format(date);
 	}
 
+	public static String parse36KrArticlePostDate(String date){
+		StringBuilder dateBuf = new StringBuilder();
+		
+		String[] dateArr =date.split("T");
+		dateBuf.append(dateArr[0]).append(" ");
+		String[] time=dateArr[1].split("\\+");
+		dateBuf.append(time[0]);
+		
+		return dateBuf.toString();
+	}
+	
+	
+	public static void main(String[] args) {
+		String dateStr="2014-12-18T12:00:38+08:00";
+		
+		String d=parse36KrArticlePostDate(dateStr);
+		System.out.println(d);
+	}
+	
 
 }

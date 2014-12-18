@@ -19,8 +19,7 @@ import com.mysql.jdbc.StringUtils;
  * @date 2014-7-9上午11:31:23
  */
 
-public class Kr36TechPageModelPipeline implements PageModelPipeline {
-	
+public class SohuITPageModelPipeline implements PageModelPipeline {
 	AtomicInteger count=new AtomicInteger(1);
 	int capicity = 1000000;
 	int initDataSize = 800000;
@@ -31,41 +30,40 @@ public class Kr36TechPageModelPipeline implements PageModelPipeline {
 		FileWriter writer = null;
 
 		bloomfilter.init("e:/tech-news.txt");
-		if (obj instanceof Kr36Crawler) {
-			Kr36Crawler qqt = (Kr36Crawler) obj;
+		if (obj instanceof SohuITHuXiuCrawler) {
+			SohuITHuXiuCrawler qqt = (SohuITHuXiuCrawler) obj;
 			String title = qqt.getTitle();
 			String date = qqt.getDate();
 			String content = qqt.getContent();
 
 			News news = new News();
-			news.setFolderId(2L);
-			news.setStatus(1);
-			news.setMedia("36氪");
+			news.setMedia("搜狐IT");
 			news.setMediaUrl(qqt.getUrl());
 			if (StringUtils.isNullOrEmpty(title)) {
 				return;
 			}
 
 			if (bloomfilter.contains(qqt.getUrl())) {
-				System.out.println(qqt.getUrl() +" have repeat...  "+count.incrementAndGet());
+				System.out.println(qqt.getUrl() +" have repeat..."+count.incrementAndGet());
 				return;
 			}
 
-			if (StringUtils.isNullOrEmpty(qqt.getImgUrl())) {
-				news.setThumbnailsUrl("");
-			} else {
-				news.setThumbnailsUrl(qqt.getImgUrl());
-			}
+		
 			if (StringUtils.isNullOrEmpty(qqt.getAuthor())) {
 				news.setAuthor("");
 			} else {
-				news.setAuthor(qqt.getAuthor());
+				String author=qqt.getAuthor();
+				if(author.length()>3){
+					news.setAuthor(author.substring(3));
+				}else{
+					news.setAuthor(qqt.getAuthor());
+				}
 			}
 
 			if (date == null) {
 				news.setPostDate(new Date());
 			} else {
-				Date d = DateUtil.convertStringDateTimeToDate(DateUtil.parse36KrArticlePostDate(date), "yyyy-MM-dd HH:mm:ss");
+				Date d = DateUtil.convertStringDateTimeToDate(date, "yyyy-MM-dd HH:mm:ss");
 				news.setPostDate(d);
 			}
 			news.setTitle(title);
@@ -78,7 +76,7 @@ public class Kr36TechPageModelPipeline implements PageModelPipeline {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			System.out.println("保存:" + news.getTitle() );
+			System.out.println("保存:" + news.getTitle()+count.incrementAndGet());
 
 		}
 	}

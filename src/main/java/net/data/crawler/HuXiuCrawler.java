@@ -10,29 +10,30 @@ import us.codecraft.webmagic.model.annotation.TargetUrl;
  * @author krisjin
  * @date 2014-7-9下午2:28:54
  */
-@TargetUrl("http://www.36kr.com/p/\\d+.html")
-public class Kr36Crawler {
 
-	@ExtractBy(value = "//h1[@class='single-post__title']/text()")
+@TargetUrl("http://www.huxiu.com/article/\\d+/\\d+.html")
+public class HuXiuCrawler {
+
+	@ExtractBy(value = "//div[@class='center-ctr-box']//h1/text()")
 	private String title;
 
-	@ExtractBy(value = "//section[@class='article']/outerHtml()")
+	@ExtractBy(value = "//div[@id='neirong_box']/outerHtml()")
 	private String content;
 
-	@ExtractBy(value = "//abbr[@class='timeago']/@title")
+	@ExtractBy(value = "//time[@id='pubtime_baidu']/text()")
 	private String date;
 
-	@ExtractBy(value = "//div[@class='single-post__postmeta']/a/text()")
+	@ExtractBy(value = "//span[@class='recommenders']//a[@id='author_baidu']/text()")
 	private String author;
 
 	@ExtractByUrl
 	private String url;
 	
-	@ExtractBy(value="//div[@class='single-post-header__headline']/img/@src")
+	@ExtractBy(value="//span[@class='span-img']/img/@src")
 	private String imgUrl;
 
 	public static void main(String[] args) {
-		OOSpider.create(Site.me(), new Kr36TechPageModelPipeline(),Kr36Crawler.class).thread(40).addUrl("http://www.36kr.com").run();
+		OOSpider.create(Site.me(), new HuXiuPageModelPipeline(),HuXiuCrawler.class).thread(40).addUrl("http://www.huxiu.com/").run();
 	}
 
 	public String getTitle() {

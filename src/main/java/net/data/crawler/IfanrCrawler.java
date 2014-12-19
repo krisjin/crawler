@@ -11,29 +11,27 @@ import us.codecraft.webmagic.model.annotation.TargetUrl;
  * @date 2014-7-9下午2:28:54
  */
 
-@TargetUrl("http://www.huxiu.com/article/\\d+/\\d+.html")
-public class HuXiuCrawler {
+@TargetUrl("http://www.ifanr.com/\\d+")
+public class IfanrCrawler {
 
-	@ExtractBy(value = "//div[@class='center-ctr-box']//h1/text()")
+	@ExtractBy(value = "//div[@class='entry-header']//h1//a/text()")
 	private String title;
 
-	@ExtractBy(value = "//div[@id='neirong_box']/outerHtml()")
+	@ExtractBy(value = "//div[@id='entry-content']/outerHtml()")
 	private String content;
 
-	@ExtractBy(value = "//time[@id='pubtime_baidu']/text()")
+	@ExtractBy(value = "//div[@class='entry-meta']/tidyText()")
 	private String date;
 
-	@ExtractBy(value = "//span[@class='recommenders']//a[@id='author_baidu']/text()")
+	@ExtractBy(value = "//div[@class='entry-meta']//a/text()")
 	private String author;
 
 	@ExtractByUrl
 	private String url;
 	
-	@ExtractBy(value="//span[@class='span-img']/img/@src")
-	private String imgUrl;
 
 	public static void main(String[] args) {
-		OOSpider.create(Site.me(), new HuXiuPageModelPipeline(),HuXiuCrawler.class).thread(10).addUrl("http://www.huxiu.com/").run();
+		OOSpider.create(Site.me(), new IfanrPageModelPipeline(),IfanrCrawler.class).thread(10).addUrl("http://www.ifanr.com").run();
 	}
 
 	public String getTitle() {
@@ -60,9 +58,6 @@ public class HuXiuCrawler {
 		return url;
 	}
 
-	public String getImgUrl() {
-		return imgUrl;
-	}
 
 	
 }

@@ -197,14 +197,22 @@ public class DateUtil {
 	}
 
 	public static String parse36KrArticlePostDate(String date){
-		StringBuilder dateBuf = new StringBuilder();
+		StringBuilder sb = new StringBuilder();
 		
 		String[] dateArr =date.split("T");
-		dateBuf.append(dateArr[0]).append(" ");
+		sb.append(dateArr[0]).append(" ");
 		String[] time=dateArr[1].split("\\+");
-		dateBuf.append(time[0]);
+		sb.append(time[0]);
 		
-		return dateBuf.toString();
+		return sb.toString();
+	}
+	
+	public static String parseIfanrPostDate(String date){
+		StringBuilder sb = new StringBuilder();
+		String[] dateArr = date.split("\\|")[0].split(",");
+		sb.append(dateArr[0].trim()).append(" ");
+		sb.append(dateArr[1].trim());
+		return sb.toString();
 	}
 	
 	

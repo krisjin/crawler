@@ -32,7 +32,7 @@ public class Kr36Crawler {
 	private String imgUrl;
 
 	public static void main(String[] args) {
-		OOSpider.create(Site.me(), new Kr36TechPageModelPipeline(),Kr36Crawler.class).thread(40).addUrl("http://www.36kr.com").run();
+		OOSpider.create(Site.me(), new Kr36TechPageModelPipeline(),Kr36Crawler.class).thread(60).addUrl("http://www.36kr.com").run();
 	}
 
 	public String getTitle() {

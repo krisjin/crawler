@@ -6,8 +6,8 @@
 	<insert id="addTechNews" parameterType="TechNews"
 		useGeneratedKeys="true" keyProperty="id">
 		INSERT INTO
-		tech_news(title,content,post_date,author,status,media_url,media,thumbnails_url)
-		VALUES(#{title},#{content},#{postDate},#{author},#{status},#{mediaUrl},#{media},#{thumbnailsUrl})
+		tech_news(title,content,post_date,author,media_url,media,thumbnails_url)
+		VALUES(#{title},#{content},#{postDate},#{author},#{mediaUrl},#{media},#{thumbnailsUrl})
 	</insert>
 
 	<select id="selectTechNewsUrls" resultType="string" parameterType="java.util.Map">

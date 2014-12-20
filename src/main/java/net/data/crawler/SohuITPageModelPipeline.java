@@ -30,8 +30,8 @@ public class SohuITPageModelPipeline implements PageModelPipeline {
 		FileWriter writer = null;
 
 		bloomfilter.init("e:/tech-news.txt");
-		if (obj instanceof SohuITHuXiuCrawler) {
-			SohuITHuXiuCrawler qqt = (SohuITHuXiuCrawler) obj;
+		if (obj instanceof SohuITCrawler) {
+			SohuITCrawler qqt = (SohuITCrawler) obj;
 			String title = qqt.getTitle();
 			String date = qqt.getDate();
 			String content = qqt.getContent();

@@ -11,20 +11,22 @@ import us.codecraft.webmagic.model.annotation.TargetUrl;
  * @date 2014-7-9下午2:28:54
  */
 
-@TargetUrl("http://it.sohu.com/\\d+/n\\d+.shtml")
-public class SohuITHuXiuCrawler {
+@TargetUrl("http://blog.csdn.net/\\w+/article/details/\\d+")
 
-	@ExtractBy(value = "//h1[@itemprop='headline']/text()")
+
+public class CSDNBlogCrawler {
+
+	@ExtractBy(value = "//span[@class='link_title']/a/text()")
 	private String title;
 
-	@ExtractBy(value = "//div[@id='contentText']/outerHtml()")
+	@ExtractBy(value = "//div[@id='article_content']/outerHtml()")
 	private String content;
 
-	@ExtractBy(value = "//div[@id='pubtime_baidu']/text()")
+	@ExtractBy(value = "//span[@class='link_postdate']/text()")
 	private String date;
 
-	@ExtractBy(value = "//span[@id='author_baidu']/text()")
-	private String author;
+//	@ExtractBy(value = "//span[@id='author_baidu']/text()")
+//	private String author;
 
 	@ExtractByUrl
 	private String url;
@@ -33,7 +35,7 @@ public class SohuITHuXiuCrawler {
 //	private String imgUrl;
 
 	public static void main(String[] args) {
-		OOSpider.create(Site.me(), new SohuITPageModelPipeline(),SohuITHuXiuCrawler.class).thread(60).addUrl("http://it.sohu.com/").run();
+		OOSpider.create(Site.me(), new CSDNBlogPageModelPipeline(),CSDNBlogCrawler.class).thread(100).addUrl("http://blog.csdn.net").run();
 	}
 
 	public String getTitle() {
@@ -48,13 +50,13 @@ public class SohuITHuXiuCrawler {
 		return date;
 	}
 
-	public String getAuthor() {
-		return author;
-	}
-
-	public void setAuthor(String author) {
-		this.author = author;
-	}
+//	public String getAuthor() {
+//		return author;
+//	}
+//
+//	public void setAuthor(String author) {
+//		this.author = author;
+//	}
 
 	public String getUrl() {
 		return url;

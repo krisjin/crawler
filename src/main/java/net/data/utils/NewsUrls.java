@@ -4,7 +4,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
 
-import net.data.service.NewsService;
+import net.data.service.TechNewsService;
 
 public class NewsUrls {
 	
@@ -12,7 +12,7 @@ public class NewsUrls {
 		FileOutputStream out =new FileOutputStream("e:/tech-news.txt");
 		int perPageCount =10000;
 		int totalPageNum=1;
-		NewsService ns = new NewsService();
+		TechNewsService ns = new TechNewsService();
 		
 		long totalCounts =ns.getTechNewsTotal();
 		System.out.println("共有："+totalCounts);
@@ -23,7 +23,6 @@ public class NewsUrls {
 		long rows=10000;
 		for(int i=0;i<=totalPageNum;i++){
 			offset=i*perPageCount;
-			
 			
 			List urls = ns.getMediaUrls(offset, perPageCount);
 			

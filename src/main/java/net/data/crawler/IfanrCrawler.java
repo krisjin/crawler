@@ -31,7 +31,7 @@ public class IfanrCrawler {
 	
 
 	public static void main(String[] args) {
-		OOSpider.create(Site.me(), new IfanrPageModelPipeline(),IfanrCrawler.class).thread(10).addUrl("http://www.ifanr.com").run();
+		OOSpider.create(Site.me(), new IfanrPageModelPipeline(),IfanrCrawler.class).thread(20).addUrl("http://www.ifanr.com").run();
 	}
 
 	public String getTitle() {

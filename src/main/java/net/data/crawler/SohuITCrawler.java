@@ -20,7 +20,7 @@ public class SohuITCrawler {
 	@ExtractBy(value = "//div[@id='contentText']/outerHtml()")
 	private String content;
 
-	@ExtractBy(value = "//div[@id='pubtime_baidu']/text()")
+	@ExtractBy(value = "//span[@id='pubtime_baidu']/text()")
 	private String date;
 
 	@ExtractBy(value = "//span[@id='author_baidu']/text()")

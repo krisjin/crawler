@@ -35,7 +35,7 @@ public class CSDNBlogCrawler {
 //	private String imgUrl;
 
 	public static void main(String[] args) {
-		OOSpider.create(Site.me(), new CSDNBlogPageModelPipeline(),CSDNBlogCrawler.class).thread(100).addUrl("http://blog.csdn.net").run();
+		OOSpider.create(Site.me(), new CSDNBlogPageModelPipeline(),CSDNBlogCrawler.class).thread(50).addUrl("http://blog.csdn.net").run();
 	}
 
 	public String getTitle() {

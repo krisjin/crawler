@@ -65,7 +65,6 @@ public class CSDNBlogPageModelPipeline implements PageModelPipeline {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			System.out.println("保存:" + article.getArticleTitle() + count.incrementAndGet());
 
 		}
 	}

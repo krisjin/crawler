@@ -3,6 +3,7 @@ package net.data.crawler;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Date;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import net.data.model.TechNews;
 import net.data.service.TechNewsService;
@@ -19,6 +20,7 @@ import com.mysql.jdbc.StringUtils;
  */
 
 public class IfanrPageModelPipeline implements PageModelPipeline {
+	AtomicInteger count = new AtomicInteger(1);
 	int capicity = 1000000;
 	int initDataSize = 800000;
 	private BloomFilter bloomfilter = new BloomFilter(capicity, initDataSize, 8);
@@ -68,7 +70,7 @@ public class IfanrPageModelPipeline implements PageModelPipeline {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			System.out.println("保存:" + techNews.getTitle());
+			System.out.println(count.incrementAndGet());
 
 		}
 	}

@@ -22,6 +22,10 @@ public class TencentTechCrawler {
 
 	@ExtractBy(value = "//span[@class='pubTime']/text()")
 	private String date;
+	
+	@ExtractBy(value = "//span[@class='article-time']/text()")
+	private String date2;
+	
 
 	@ExtractBy(value = "//span[@class='auth']/text()")
 	private String author;
@@ -33,7 +37,7 @@ public class TencentTechCrawler {
 	private String imgUrl;
 
 	public static void main(String[] args) {
-		OOSpider.create(Site.me(), new TencentTechPageModelPipeline(),TencentTechCrawler.class).thread(20).addUrl("http://tech.qq.com").run();
+		OOSpider.create(Site.me(), new TencentTechPageModelPipeline(),TencentTechCrawler.class).thread(40).addUrl("http://tech.qq.com").run();
 	}
 
 	public String getTitle() {
@@ -62,6 +66,10 @@ public class TencentTechCrawler {
 
 	public String getImgUrl() {
 		return imgUrl;
+	}
+
+	public String getDate2() {
+		return date2;
 	}
 
 	

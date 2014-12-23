@@ -215,6 +215,10 @@ public class DateUtil {
 		return sb.toString();
 	}
 	
+	public static String parseOscBlogPostDate(String date){
+		String ret =date.substring(date.indexOf("(")+1, date.indexOf(")"));
+		return ret;
+	}
 	
 	public static void main(String[] args) {
 		String dateStr="2014-12-18T12:00:38+08:00";

@@ -21,15 +21,15 @@ import com.mysql.jdbc.StringUtils;
 
 public class CSDNBlogPageModelPipeline implements PageModelPipeline {
 	AtomicInteger count = new AtomicInteger(1);
-	int capicity = 1000000;
-	int initDataSize = 800000;
+	int capicity = 10000000;
+	int initDataSize = 8000000;
 	private BloomFilter bloomfilter = new BloomFilter(capicity, initDataSize, 8);
 	private TechArticleService articleService = new TechArticleService();
 
 	public void process(Object obj, Task task) {
 		FileWriter writer = null;
 
-		bloomfilter.init("e:/tech-artilce.txt");
+		bloomfilter.init("e:/tech-article.txt");
 		if (obj instanceof CSDNBlogCrawler) {
 			CSDNBlogCrawler qqt = (CSDNBlogCrawler) obj;
 			String title = qqt.getTitle();
@@ -45,7 +45,6 @@ public class CSDNBlogPageModelPipeline implements PageModelPipeline {
 			}
 
 			if (bloomfilter.contains(qqt.getUrl())) {
-				System.out.println(qqt.getUrl() + " have repeat..." + count.incrementAndGet());
 				return;
 			}
 
@@ -55,16 +54,17 @@ public class CSDNBlogPageModelPipeline implements PageModelPipeline {
 				Date d = DateUtil.convertStringDateTimeToDate(date, "yyyy-MM-dd HH:mm");
 				article.setArticlePostDate(d);
 			}
-			article.setArticleTitle(title);
+			article.setArticleTitle(title.trim());
 			article.setArticleContent(content);
 			articleService.addTechArticle(article);
 			try {
-				writer = new FileWriter("e:/tech-artilce.txt", true);
+				writer = new FileWriter("e:/tech-article.txt", true);
 				writer.write((qqt.getUrl() + "\n"));
 				writer.close();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+			System.out.println("save..." + title.trim());
 
 		}
 	}

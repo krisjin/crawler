@@ -8,5 +8,11 @@
 		tech_article(article_title,article_content,article_post_date,article_url,article_site,article_tag)
 		VALUES(#{articleTitle},#{articleContent},#{articlePostDate},#{articleUrl},#{articleSite},#{articleTag})
 	</insert>
-
+	<select id="selectTechArticleUrls" resultType="string" parameterType="java.util.Map">
+		select article_url from tech_article limit #{offset},#{rows}
+	</select>
+	
+	<select id="getTechArticleTotal" resultType="long">
+		select count(*) from tech_article
+	</select>
 </mapper>

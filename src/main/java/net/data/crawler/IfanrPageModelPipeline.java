@@ -60,7 +60,7 @@ public class IfanrPageModelPipeline implements PageModelPipeline {
 				Date d = DateUtil.convertStringDateTimeToDate(DateUtil.parseIfanrPostDate(date), "yyyy-MM-dd HH:mm");
 				techNews.setPostDate(d);
 			}
-			techNews.setTitle(title);
+			techNews.setTitle(title.trim());
 			techNews.setContent(content);
 			techNewsService.addTechNews(techNews);
 			try {

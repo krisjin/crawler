@@ -1,5 +1,7 @@
 package net.snails.pipeline;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Date;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -15,13 +17,14 @@ public class OSCBlogPipeline implements Pipeline {
 	
 	
 	AtomicInteger count = new AtomicInteger(1);
-	int capicity = 1000000;
-	int initDataSize = 800000;
+	int capicity = 8000000;
+	int initDataSize = 5000000;
 	private BloomFilter bloomfilter = new BloomFilter(capicity, initDataSize, 8);
 	private TechArticleService articleService = new TechArticleService();
 	
 	
 	public void process(ResultItems result, Task task) {
+		FileWriter writer = null;
 		String title = result.get("title");
 		String date = result.get("date");
 		String content = result.get("content");
@@ -34,16 +37,22 @@ public class OSCBlogPipeline implements Pipeline {
 		}
 		
 		TechArticle art=new TechArticle();
-		art.setArticleTitle(title);
+		art.setArticleTitle(title.trim());
 		art.setArticleUrl(url);
 		art.setArticleContent(content);
 		art.setArticlePostDate(d);
+		art.setArticleSite("OSCBlog");
 		
+		articleService.addTechArticle(art);
 		
-		
-		
-		System.out.println();
-		
+		try {
+			writer = new FileWriter("e:/tech-article.txt", true);
+			writer.write((art.getArticleUrl() + "\n"));
+			writer.close();
+			System.out.println("save "+art.getArticleUrl());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		
 	}
 

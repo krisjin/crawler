@@ -4,6 +4,7 @@ import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.model.OOSpider;
 import us.codecraft.webmagic.model.annotation.ExtractBy;
 import us.codecraft.webmagic.model.annotation.ExtractByUrl;
+import us.codecraft.webmagic.model.annotation.HelpUrl;
 import us.codecraft.webmagic.model.annotation.TargetUrl;
 
 /**
@@ -32,7 +33,7 @@ public class Kr36Crawler {
 	private String imgUrl;
 
 	public static void main(String[] args) {
-		OOSpider.create(Site.me(), new Kr36TechPageModelPipeline(),Kr36Crawler.class).thread(60).addUrl("http://www.36kr.com").run();
+		OOSpider.create(Site.me().setRetryTimes(3), new Kr36TechPageModelPipeline(),Kr36Crawler.class).thread(40).addUrl("http://www.36kr.com").run();
 	}
 
 	public String getTitle() {

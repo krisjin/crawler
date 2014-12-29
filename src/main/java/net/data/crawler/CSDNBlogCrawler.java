@@ -4,6 +4,7 @@ import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.model.OOSpider;
 import us.codecraft.webmagic.model.annotation.ExtractBy;
 import us.codecraft.webmagic.model.annotation.ExtractByUrl;
+import us.codecraft.webmagic.model.annotation.HelpUrl;
 import us.codecraft.webmagic.model.annotation.TargetUrl;
 
 /**
@@ -12,8 +13,6 @@ import us.codecraft.webmagic.model.annotation.TargetUrl;
  */
 
 @TargetUrl("http://blog.csdn.net/\\w+/article/details/\\d+")
-
-
 public class CSDNBlogCrawler {
 
 	@ExtractBy(value = "//span[@class='link_title']/a/text()")
@@ -35,7 +34,7 @@ public class CSDNBlogCrawler {
 //	private String imgUrl;
 
 	public static void main(String[] args) {
-		OOSpider.create(Site.me(), new CSDNBlogPageModelPipeline(),CSDNBlogCrawler.class).thread(50).addUrl("http://blog.csdn.net").run();
+		OOSpider.create(Site.me().setRetryTimes(2), new CSDNBlogPageModelPipeline(),CSDNBlogCrawler.class).thread(40).addUrl("http://blog.csdn.net/").run();
 	}
 
 	public String getTitle() {

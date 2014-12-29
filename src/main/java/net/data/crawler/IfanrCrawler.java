@@ -4,6 +4,7 @@ import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.model.OOSpider;
 import us.codecraft.webmagic.model.annotation.ExtractBy;
 import us.codecraft.webmagic.model.annotation.ExtractByUrl;
+import us.codecraft.webmagic.model.annotation.HelpUrl;
 import us.codecraft.webmagic.model.annotation.TargetUrl;
 
 /**
@@ -11,6 +12,7 @@ import us.codecraft.webmagic.model.annotation.TargetUrl;
  * @date 2014-7-9下午2:28:54
  */
 
+@HelpUrl("http://www.ifanr.com/page/\\w+")
 @TargetUrl("http://www.ifanr.com/\\d+")
 public class IfanrCrawler {
 
@@ -31,7 +33,7 @@ public class IfanrCrawler {
 	
 
 	public static void main(String[] args) {
-		OOSpider.create(Site.me(), new IfanrPageModelPipeline(),IfanrCrawler.class).thread(20).addUrl("http://www.ifanr.com").run();
+		OOSpider.create(Site.me(), new IfanrPageModelPipeline(),IfanrCrawler.class).thread(30).addUrl("http://www.ifanr.com/page/37").run();
 	}
 
 	public String getTitle() {

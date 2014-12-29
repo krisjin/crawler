@@ -1,6 +1,12 @@
 package net.data.service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import net.data.mappers.TechArticleMapper;
+import net.data.mappers.TechNewsMapper;
 import net.data.model.TechArticle;
 import net.data.utils.MyBatisUtil;
 
@@ -27,6 +33,36 @@ public class TechArticleService {
 			sqlSession.close();
 		}
 	}
+	public long getTechArticleTotal() {
+		long total = 0;
+		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
+		try {
+			TechArticleMapper tech = sqlSession.getMapper(TechArticleMapper.class);
+			total = tech.getTechArticleTotal();
+			sqlSession.commit();
+		} finally {
+			sqlSession.close();
+		}
 
+		return total;
+	}
+
+	public List getArticleUrls(long offset, long row) {
+
+		List urlList = new ArrayList();
+		SqlSession sqlSession = MyBatisUtil.getSqlSessionFactory().openSession();
+		try {
+			Map<String,Long>  param =new HashMap<String,Long>();
+			TechArticleMapper tech = sqlSession.getMapper(TechArticleMapper.class);
+			param.put("offset", offset);
+			param.put("rows", row);
+			urlList = tech.selectTechArticleUrls(param);
+			sqlSession.commit();
+		} finally {
+			sqlSession.close();
+		}
+
+		return urlList;
+	}
 
 }

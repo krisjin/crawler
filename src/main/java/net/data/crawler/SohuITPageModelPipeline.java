@@ -66,7 +66,7 @@ public class SohuITPageModelPipeline implements PageModelPipeline {
 				Date d = DateUtil.convertStringDateTimeToDate(date, "yyyy-MM-dd HH:mm:ss");
 				news.setPostDate(d);
 			}
-			news.setTitle(title);
+			news.setTitle(title.trim());
 			news.setContent(content);
 			newsService.addNews(news);
 			try {

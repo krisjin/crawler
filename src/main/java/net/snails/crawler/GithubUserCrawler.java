@@ -7,6 +7,6 @@ import us.codecraft.webmagic.Spider;
 public class GithubUserCrawler {
 	public static void main(String[] args) {
 		Spider.create(new GithubUserPageProcessor()).addUrl("https://github.com/krisjin").addPipeline(new GithubUserPipeline())
-				.thread(3).run();
+				.thread(5).run();
 	}
 }

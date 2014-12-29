@@ -67,7 +67,7 @@ public class TencentTechPageModelPipeline implements PageModelPipeline {
 				Date d = DateUtil.convertStringDateTimeToDate(date, "yyyy年MM月dd日HH:mm");
 				techNews.setPostDate(d);
 			}
-			techNews.setTitle(title);
+			techNews.setTitle(title.trim());
 			techNews.setContent(content);
 			newsService.addTechNews(techNews);
 			try {

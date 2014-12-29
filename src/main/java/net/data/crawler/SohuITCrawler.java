@@ -33,7 +33,7 @@ public class SohuITCrawler {
 //	private String imgUrl;
 
 	public static void main(String[] args) {
-		OOSpider.create(Site.me(), new SohuITPageModelPipeline(),SohuITCrawler.class).thread(60).addUrl("http://it.sohu.com/").run();
+		OOSpider.create(Site.me(), new SohuITPageModelPipeline(),SohuITCrawler.class).thread(60).addUrl("http://it.sohu.com/20140225/n395601377.shtml").run();
 	}
 
 	public String getTitle() {
